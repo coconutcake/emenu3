@@ -1,0 +1,11 @@
+language: python
+python:
+    - "3.8"
+
+services:
+    - docker
+
+before_script: pip install docker-compose
+
+script:
+    - docker-compose run emenu sh -c 'coverage run app/manage.py test app && coverage report && python3 /app/manage.py makemigrations && python3 /app/manage.py migrate'

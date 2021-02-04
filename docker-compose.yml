@@ -1,0 +1,68 @@
+version: "3"
+
+services:
+    postgres:
+        image: postgres
+        container_name: postgres
+        restart: always
+        environment:
+            POSTGRES_DB: app         
+            POSTGRES_USER: django_app
+            POSTGRES_PASSWORD: asdasd123
+        ports:
+            - 5432:5432
+        volumes:             
+            - ./initial/db:/docker-entrypoint-initdb.d
+    adminer:
+        image: adminer
+        container_name: adminer
+        restart: always
+        ports:
+            - 8080:8080
+        depends_on:
+            - postgres
+    django:
+        build: 
+            context: .
+            dockerfile: ./dockerfiles/python38/Dockerfile
+        container_name: django
+        volumes:
+            - ./app:/app
+            - static:/app/static
+            - media:/app/media
+        environment:
+            - ADDRESS=0.0.0.0
+            - PORT=8877
+            - DB_ENGINE=django.db.backends.postgresql
+            - DB_NAME=app
+            - DB_USER=django_app
+            - DB_PASSWORD=asdasd123
+            - DB_ADDRESS=postgres
+            - DB_PORT=5432
+            - DB_TESTS=tests
+        ports:
+            - 8877:8877
+        depends_on:
+            - postgres
+        command: >
+            /resources/wait-for-it.sh postgres:5432 --timeout=30 --strict -- /run.sh
+    nginx:
+        container_name: nginx20
+        restart: always
+        build:
+            context: .
+            dockerfile: ./dockerfiles/nginx/Dockerfile
+        volumes: 
+            - ./logs:/var/log/nginx
+            - static:/static/
+            - media:/media/
+        ports: 
+            - "8833:8833"
+            - "4433:4433"   
+        depends_on: 
+            - django
+        command: >
+            /resources/wait-for-it.sh django:8877 --timeout=30 --strict -- /run.sh
+volumes: 
+    static:
+    media:

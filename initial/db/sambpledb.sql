@@ -1,0 +1,2 @@
+CREATE DATABASE sampledb;
+GRANT ALL PRIVILEGES ON DATABASE tests TO django_app;
