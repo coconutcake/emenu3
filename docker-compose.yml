@@ -21,11 +21,11 @@ services:
             - 8080:8080
         depends_on:
             - postgres
-    django:
+    emenu:
         build: 
             context: .
             dockerfile: ./dockerfiles/python38/Dockerfile
-        container_name: django
+        container_name: emenu
         volumes:
             - ./app:/app
             - static:/app/static
