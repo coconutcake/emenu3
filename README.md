@@ -20,43 +20,41 @@
     <br> 
 </p>
 
-## 📝 Table of Contents
+## 📝 Zawartość
 
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
-
+- [O projekcie](#about)
+- [Uruchomienie](#getting_started)
 
 
-## 🧐 About <a name = "about"></a>
 
-This complete package includes all You need to start making django app on docker containers saving Your time for preparations. With one command, You can start the whole stack using Docker Composer which includes:
-- Python 3.8 slim machine container with Django version 3.1.2 (prepared for handling with postgresql)
-- Postgresql container version 12
-- Adminer container for handling postgresql
-- Nginx for handling upstream Django with reverse proxy and ssl server
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+## 🧐 O projekcie <a name = "about"></a>
 
-The first thing You wanted to check before You can move further is Docker. In case You havent downloaded yet, please choose Your appriopriate platform and download docker [here](https://www.docker.com/get-started). Make sure, You also have the latest git version installed as well.
+Projekt zadania opiera sie na poniższych kontenerach dockera :
+- Python 3.8 z django
+- Baza Postgres dla django
+- Adminer
+- Upstream server nginx
 
-### Installing
+## 🚀 Uruchomienie <a name = "getting_started"></a>
 
-After docker engine installation, clone the current repository:
+Wykonaj klona jesli masz juz zainstalowanego dockera:
 ```
 git clone https://github.com/coconutcake/eMenu.git
 ```
 
-## 🚀 Deployment <a name = "deployment"></a>
-
-Simply run from main directory:
+Po pobraniu klona, przejdz do folderu i zbuduj obrazy poleceniem:
 
 ```
 docker-compose up --build
 ```
-in order to build all required Dockerfiles and launch the stack. 
-Thats all! 
-Your services are running now and You can check their availability:
 
-- Django -> [http://127.0.0.1:8833](http://127.0.0.1:8833) - Accept self-signed ssl certificate here to redirect to HTTPS
+Aplikacja powinna być dostępna.
+Aby zalogować sie na panel administracyjny należy pierw utworzyć konto superadmina.
+
+```
+docker exec -it emenu sh -c "python3 app/manage.py createsuperuser"
+```
+
+- Django -> [http://127.0.0.1:8833](http://127.0.0.1:8833) - Wymagana akceptacja samopodpisanego certyfikatu SSL
 - Adminer -> [http://127.0.0.1:8080](http://127.0.0.1:8080)
