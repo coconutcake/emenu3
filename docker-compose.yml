@@ -62,7 +62,7 @@ services:
         depends_on: 
             - django
         command: >
-            /resources/wait-for-it.sh django:8877 --timeout=30 --strict -- /run.sh
+            /resources/wait-for-it.sh emenu:8877 --timeout=30 --strict -- /run.sh
 volumes: 
     static:
     media:
