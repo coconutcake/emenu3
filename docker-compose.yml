@@ -40,6 +40,7 @@ services:
             - DB_ADDRESS=postgres
             - DB_PORT=5432
             - DB_TESTS=tests
+            - MASTER_TOKEN=20011865a6a3a79c47e5fa3b4dd31ba9c490186d
         ports:
             - 8877:8877
         depends_on:
@@ -58,11 +59,21 @@ services:
             - media:/media/
         ports: 
             - "8833:8833"
-            - "4433:4433"   
+            - "4433:4433"  
         depends_on: 
             - emenu
         command: >
             /resources/wait-for-it.sh emenu:8877 --timeout=30 --strict -- /run.sh
+    cron:
+        container_name: cron
+        restart: always
+        build:
+            context: .
+            dockerfile: ./dockerfiles/cron/Dockerfile
+        depends_on: 
+            - nginx
+            - emenu
+
 volumes: 
     static:
     media:
