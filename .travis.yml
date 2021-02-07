@@ -8,4 +8,4 @@ services:
 before_script: pip install docker-compose
 
 script:
-    - docker-compose run emenu sh -c 'coverage run app/manage.py test app && coverage report && python3 /app/manage.py makemigrations && python3 /app/manage.py migrate'
+    - docker-compose run emenu sh -c '/resources/wait-for-it.sh postgres:5432 --timeout=50 -- coverage run app/manage.py test app && coverage report && python3 /app/manage.py makemigrations && python3 /app/manage.py migrate'
