@@ -4,8 +4,12 @@ from rest_framework import \
 from rest_framework.settings import \
     api_settings
 from menu.models import Dish,Menu
+import json
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
+from django.views import View
 import django_filters.rest_framework
 from menu.serializers import \
     DishSerializer, MenuSerializer, MenuListSerializer
@@ -19,6 +23,7 @@ class DishCreateView(generics.CreateAPIView):
     permission_classes = [
         permissions.IsAuthenticated
         ]
+  
     
 class DishDetailView(generics.RetrieveUpdateAPIView):
     queryset = Dish.objects.all()
@@ -53,6 +58,7 @@ class MenuCreateView(generics.CreateAPIView):
     permission_classes = [
         permissions.IsAuthenticated
         ]
+  
     
 class MenuDetailView(generics.RetrieveUpdateAPIView):
     model = Menu
@@ -72,6 +78,7 @@ class MenuDetailView(generics.RetrieveUpdateAPIView):
         obj = get_object_or_404(queryset, pk=pk)
         serializer = MenuListSerializer(obj)
         return Response(serializer.data)
+      
         
 class MenuDeleteView(generics.DestroyAPIView):
     queryset = Menu.objects.all()
@@ -83,6 +90,7 @@ class MenuDeleteView(generics.DestroyAPIView):
     permission_classes = [
         permissions.IsAuthenticated
         ]
+  
     
 class MenuListView(generics.ListAPIView):
     dishes = Dish.objects.all()
@@ -92,10 +100,13 @@ class MenuListView(generics.ListAPIView):
         "created":["icontains"],
         "updated":["icontains"]
         }
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    ordering_fields = ['name']
     serializer_class = MenuListSerializer
     permission_classes = [
         permissions.AllowAny
         ]
+  
     
 class DishListView(generics.ListAPIView):
     queryset = Dish.objects.all()
@@ -103,4 +114,5 @@ class DishListView(generics.ListAPIView):
     permission_classes = [
         permissions.AllowAny
         ]
+
 

@@ -24,8 +24,11 @@ class Dish(models.Model):
     def get_absolute_url(self):
         return reverse("Menu_detail", kwargs={"pk": self.pk})
 
+    def get_view_fields(self):
+        """ Zwraca widoczne pola instancji """
+        return [(field.verbose_name, field.value_to_string(self)) for field in self.__class__._meta.fields]
 class Menu(models.Model):
-    name = models.CharField(_("Nazwa unikalna menu"), max_length=50)
+    name = models.CharField(_("Nazwa unikalna menu"),unique=True,max_length=50)
     dish = models.ManyToManyField(Dish, verbose_name=_("Danie"))
     created = models.DateTimeField(_("Utworzono"),\
         auto_now=False, auto_now_add=False,blank=True,null=True)
@@ -41,6 +44,11 @@ class Menu(models.Model):
 
     def get_absolute_url(self):
         return reverse("Menu_detail", kwargs={"pk": self.pk})
+
+    def get_view_fields(self):
+        """ Zwraca widoczne pola instancji """
+        return [(field.verbose_name, field.value_to_string(self)) for field in self.__class__._meta.fields]
+
 
 
 # Signals

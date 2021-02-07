@@ -152,4 +152,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'core.User'
+MASTER_TOKEN = os.environ.get("MASTER_TOKEN"),
 
+# Konto email do notyfikacji
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'lubiete.atthost24.pl'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'no-reply@mign.pl'
+EMAIL_HOST_PASSWORD = 'Nycb7riuANR6z22AWHhE'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False

@@ -3,7 +3,7 @@ from django.urls import path
 from django.conf.urls import url
 from menu import views
 from rest_framework.routers import DefaultRouter
-
+from django.views.generic import TemplateView
 app_name = 'menu'
 
 urlpatterns = [
