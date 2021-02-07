@@ -1,0 +1,45 @@
+Powiadomienie:
+
+Witaj: {{ instance }}
+
+
+{% if created_yesterdays_menu %}
+Lista menu dodanych wczoraj wg iteracji pol instancji:
+    
+        {% for obj in created_yesterdays_menu %}
+            
+                {% for field,value in obj.get_view_fields %}
+                    {{ field }} - {{ value }}
+                {% endfor %}
+            
+        {% endfor %}
+    
+{% endif %}
+
+
+{% if created_yesterdays_menu %}
+Lista menu dodanych wczoraj (formatowany template):
+
+        {% for obj in created_yesterdays_menu %}
+
+Lp:{{ forloop.counter }}
+Nazwa:{{ obj.name }}
+Dania:{% for dish in obj.dish.all %}{{ dish }},{% endfor %}
+Utworzono:{{ obj.created|date:"Y-m-d" }}
+Zaktualizowano:{{ obj.updated|date:"Y-m-d" }}
+
+        {% endfor %}
+
+{% endif %}
+
+
+{% if updated_yesterdays_menu %}
+Lista menu aktualizowanych wczoraj wg iteracji pol instancji:
+
+        {% for obj in updated_yesterdays_menu %}
+            {{ obj.get_view_fields }}
+        {% endfor %}
+
+{% endif %}
+
+

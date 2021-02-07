@@ -1,0 +1,52 @@
+<h1>Powiadomienie:</h1>
+{% autoescape on %}
+    <h1>{{ instance }}</h1>
+{% endautoescape %}
+{% autoescape off %}
+    <h1>{{ instance }}</h1>
+{% endautoescape %}
+
+<h3>Witaj: {{ instance }}</h3>
+
+<!-- Created: Menu -->
+{% if created_yesterdays_menu %}
+<h2>Lista menu dodanych wczoraj wg iteracji pol instancji:<h2>
+    <ul>
+        {% for obj in created_yesterdays_menu %}
+            <li>
+                {% for field,value in obj.get_view_fields %}
+                    <span>{{ field }} - {{ value }} </span>
+                {% endfor %}
+            <li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<!-- Created: Menu -->
+{% if created_yesterdays_menu %}
+<h2>Lista menu dodanych wczoraj (formatowany template):<h2>
+    <ul>
+        {% for obj in created_yesterdays_menu %}
+            <li>
+                <span><b>Lp:&nbsp;</b>{{ forloop.counter }}</span>
+                <span><b>Nazwa:&nbsp;</b>{{ obj.name }}</span>
+                <span><b>Dania:&nbsp;</b>{% for dish in obj.dish.all %}{{ dish }},{% endfor %}</span>
+                <span><b>Utworzono:&nbsp;</b>{{ obj.created|date:"Y-m-d" }}</span>
+                <span><b>Zaktualizowano:&nbsp;</b>{{ obj.updated|date:"Y-m-d" }}</span>
+
+            <li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<!-- Updated: Menu -->
+{% if updated_yesterdays_menu %}
+<h2>Lista menu aktualizowanych wczoraj wg iteracji pol instancji:<h2>
+    <ul>
+        {% for obj in updated_yesterdays_menu %}
+            <li>{{ obj.get_view_fields }}<li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
