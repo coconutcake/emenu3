@@ -46,7 +46,7 @@ services:
         depends_on:
             - postgres
         command: >
-            /resources/wait-for-it.sh postgres:5432 --timeout=30 --strict -- /run.sh
+            /resources/wait-for-it.sh postgres:5432 --timeout=50 --strict -- /run.sh
     nginx:
         container_name: nginx20
         restart: always
