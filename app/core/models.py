@@ -1,6 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-# from core import signals 
+import datetime
+from core.additionals.emailnotify import EmailNotification
+from menu.models import Menu,Dish
+
+
+# funkcje pomocnicze
+def get_current_time():
+    return datetime.datetime.now()
+def get_yesterday_date():
+    yesterday = get_current_time()-datetime.timedelta(days=1)
+    return yesterday.date()
+def get_created_yesterdays(model):
+    return model.objects.filter(created__date=get_yesterday_date())
+def get_updated_yesterdays(model):
+    return model.objects.filter(updated__date=get_yesterday_date())
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -33,17 +47,3 @@ class User(AbstractBaseUser,PermissionsMixin):
     objects = UserManager()
     USERNAME_FIELD = 'email'
 
-
-
-
-# Auto tworzenie tokena usera
-
-# from django.conf import settings
-# from django.db.models.signals import post_save
-# from django.dispatch import receiver
-# from rest_framework.authtoken.models import Token
-
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-# def create_auth_token(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         Token.objects.create(user=instance)
