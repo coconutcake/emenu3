@@ -7,9 +7,8 @@
 
 <div align="center">
 
-[![Staus](https://img.shields.io/travis/coconutcake/eMenu)](https://travis-ci.org/github/coconutcake/eMenu)
-[![Size](https://img.shields.io/github/repo-size/coconutcake/eMenu?style=flat-square)]()
-[![Dependencies](https://img.shields.io/requires/github/coconutcake/eMenu)](https://requires.io/github/coconutcake/eMenu/requirements/?branch=main)
+[![Stauts](https://img.shields.io/travis/coconutcake/eMenu3)](https://travis-ci.org/github/coconutcake/emenu3)
+[![Dependencies](https://img.shields.io/requires/github/coconutcake/eMenu3)](https://requires.io/github/coconutcake/emenu3/requirements/?branch=main)
 
 
 </div>
