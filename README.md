@@ -8,8 +8,7 @@
 <div align="center">
 
 [![Stauts](https://img.shields.io/travis/coconutcake/eMenu3)](https://travis-ci.org/github/coconutcake/emenu3)
-[![Dependencies](https://img.shields.io/requires/github/coconutcake/eMenu3)](https://requires.io/github/coconutcake/emenu3/requirements/?branch=main)
-
+[![Requirements Status](https://requires.io/github/coconutcake/emenu3/requirements.svg?branch=main)](https://requires.io/github/coconutcake/emenu3/requirements/?branch=main)
 
 </div>
 
