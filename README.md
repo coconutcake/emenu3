@@ -54,7 +54,7 @@ Aplikacja:
 
 Wykonaj klona jesli masz juz zainstalowanego dockera:
 ```
-git clone https://github.com/coconutcake/eMenu.git
+git clone https://github.com/coconutcake/emenu3.git
 ```
 
 Po pobraniu klona, przejdz do folderu i zbuduj obrazy poleceniem:
