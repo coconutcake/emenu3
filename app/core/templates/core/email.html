@@ -48,5 +48,21 @@
         {% endfor %}
     </ul>
 {% endif %}
+<!-- Updated: Menu -->
+{% if updated_yesterdays_menu %}
+<h2>Lista menu dodanych wczoraj (formatowany template):<h2>
+    <ul>
+        {% for obj in updated_yesterdays_menu %}
+            <li>
+                <span><b>Lp:&nbsp;</b>{{ forloop.counter }}</span>
+                <span><b>Nazwa:&nbsp;</b>{{ obj.name }}</span>
+                <span><b>Dania:&nbsp;</b>{% for dish in obj.dish.all %}{{ dish }},{% endfor %}</span>
+                <span><b>Utworzono:&nbsp;</b>{{ obj.created|date:"Y-m-d" }}</span>
+                <span><b>Zaktualizowano:&nbsp;</b>{{ obj.updated|date:"Y-m-d" }}</span>
+
+            <li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 
