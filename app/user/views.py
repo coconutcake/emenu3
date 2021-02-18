@@ -18,7 +18,8 @@ from rest_framework import status
 class UserListView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
+    permission_classes = [IsAdminUser]
+    
     def list(self,request,*args,**kwargs):
         queryset = User.objects.all()
         serializer = UserSerializer(queryset, many=True)
@@ -27,6 +28,7 @@ class UserListView(ListAPIView):
 class UserCreateView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
 
     def perform_create(self,serializer):
         serializer.save()
