@@ -49,6 +49,7 @@ Aplikacja:
 - W projekcie wykorzystano bibliteke wait-for-it w celu kolejkowania uruchamianych kontenerów
 - Folder ./initial miescie pliki inicjujace w tym ustawienia crona,nginxa,aplikacji django
 - do wysylki powiadomien mailowych wykorzystano konto mailowe no-reply@mign.pl 
+- dostepna jest przegladarka API (Swagger)
 
 ## 🚀 Uruchomienie <a name = "getting_started"></a>
 
@@ -86,7 +87,7 @@ docker exec -it emenu sh -c "python3 app/manage.py drf_create_token USER"
 Możliwe jest równiez utworzenie tokena przez wbudowany CMS
 
 Adresy na lokalnej maszynie:
-- Django -> [http://127.0.0.1:8833](http://127.0.0.1:8833) - Wymagana akceptacja samopodpisanego certyfikatu SSL
+- Django (Swagger) -> [http://127.0.0.1:8833](http://127.0.0.1:8833) - Wymagana akceptacja samopodpisanego certyfikatu SSL
 - DjangoSSL -> [https://127.0.0.1:4433](https://127.0.0.1:4433)
 - Adminer -> [http://127.0.0.1:8080](http://127.0.0.1:8080)
 
