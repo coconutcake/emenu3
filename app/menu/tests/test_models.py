@@ -2,6 +2,7 @@ from django.test import TestCase
 import datetime
 from django.forms.models import model_to_dict
 from menu.models import Dish,Menu
+from django.db import IntegrityError
 
 # Fukcje pomocnicze
 def get_current_datetime():
@@ -81,3 +82,16 @@ class MenuTests(TestCase):
         self.assertTrue(created.dish.exists())   
 
         
+    def test_if_not_created_duplicating_unique_name(self):
+        """ Sprawdza czy nie da sie utworzyć menu ze zduplikowaną nazwą unikalną """
+        params_0 = {
+            "name": "nazwa menu",
+            }
+        params_1 = {
+            "name": "nazwa menu",
+            }
+        created = self.model.objects.create(**params_0)
+        created.dish.add(self.dish)
+        
+        with self.assertRaises(IntegrityError) as ie:
+            created2 = self.model.objects.create(**params_1)
