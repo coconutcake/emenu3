@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
     'rest_framework',
     'rest_framework.authtoken',
     'core',
@@ -148,11 +149,17 @@ DATETIME_FORMAT = 'd-m-Y H:i:s'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+
+# Statics and media
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Model Usera
 AUTH_USER_MODEL = 'core.User'
+
+# Token dla curla
 MASTER_TOKEN = os.environ.get("MASTER_TOKEN"),
 
 # Konto email do notyfikacji
@@ -163,3 +170,39 @@ EMAIL_HOST_USER = 'no-reply@mign.pl'
 EMAIL_HOST_PASSWORD = 'Nycb7riuANR6z22AWHhE'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+
+# Permissions and auth
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+    ]
+}
+
+# Urle logowania
+LOGIN_URL = "admin:login"
+LOGOUT_REDIRECT_URL = '/swagger'
+
+# Swagger CURL ssl self-signed passer
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Swagger settings
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': True,
+    'SECURITY_DEFINITIONS': {
+        # 'Basic': {
+        #     'type': 'basic'
+        # },
+      'Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
+}
