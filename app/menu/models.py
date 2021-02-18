@@ -27,6 +27,7 @@ class Dish(models.Model):
     def get_view_fields(self):
         """ Zwraca widoczne pola instancji """
         return [(field.verbose_name, field.value_to_string(self)) for field in self.__class__._meta.fields]
+    
 class Menu(models.Model):
     name = models.CharField(_("Nazwa unikalna menu"),unique=True,max_length=50)
     dish = models.ManyToManyField(Dish, verbose_name=_("Danie"))
