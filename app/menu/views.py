@@ -14,7 +14,7 @@ from django.views import View
 import django_filters.rest_framework
 from menu.serializers import \
     DishSerializer, MenuSerializer, MenuListSerializer
-
+from menu.filters import MenuFilterSet
 from drf_yasg.utils import swagger_auto_schema
 
 API_COMMENTS = {
@@ -119,7 +119,10 @@ class MenuDetailView(generics.RetrieveUpdateAPIView):
         queryset = Menu.objects.all()
         obj = get_object_or_404(queryset, pk=pk)
         serializer = MenuListSerializer(obj)
-        return Response(serializer.data)
+
+        return Response(\
+            serializer.data,
+            )
       
     @swagger_auto_schema(\
         tags=[model.__name__],
@@ -165,11 +168,15 @@ class MenuListView(generics.ListAPIView):
     model = Menu
     dishes = Dish.objects.all()
     queryset = model.objects.filter(dish__in=dishes).distinct()
-    filterset_fields = {
-        "name":["icontains"],
-        "created":["icontains"],
-        "updated":["icontains"]
-        }
+    
+    # Filtrowanie
+    # filterset_fields = {
+    #     "name":["icontains"],
+    #     "created":["date"],
+    #     "updated":["date"]
+    #     }
+    filterset_class = MenuFilterSet
+    
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
     ordering_fields = ['name']
     serializer_class = MenuListSerializer
