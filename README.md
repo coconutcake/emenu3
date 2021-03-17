@@ -19,24 +19,45 @@
 </p>
 
 ## 📝 Zawartość
-
 - [O projekcie](#about)
+- [Założenia projektowe](#zalozenia)
+- [Technologia i metodyka](#tech)
 - [Uruchomienie](#getting_started)
 - [API](#api)
 
+## 🧐 O projekcie <a name = "about"></a>  
 
+Projekt i implementacja samodzielnego serwisu eMenu, służącego jako restauracyjna karta menu online.
 
+## 📰 Założenia projektowe <a name = "zalozenia"></a>
 
-## 🧐 O projekcie <a name = "about"></a>
+#### API publicznie:
+1. Rest API do przeglądania niepustych karta menu.
+2. Możliwość sortowanie listy po nazwie oraz liczbie dań, za pomocą parametrów GET
+3. Filtrowanie listy po nazwie oraz okresie dodanie i ostatnie aktualizacji
+4. Detal karty prezentujący wszystkie dana dotyczące karty oraz dań w karcie.
+#### Raportowanie:
+1. Przygotować mechanizm, który raz dziennie o 10:00 wyśle e-mail do wszystkich użytkowników aplikacji
+2. E-mail musi zawierać informację o nowa dodanych przepisach oraz ostatnio zmodyfikowanych przepisach
+3. Wysyłamy informację tylko o tych, który zostały zmodyfikowane poprzedniego dnia.
+#### Dodatkowo:
+1. Konieczne jest załączenie instrukcji instalacji oraz uruchomienia projektu
+2. Mile widziane jest przygotowanie aplikacji po uruchomienie w Docker (Dockerfile oraz docker-compose.yml do uruchomienia aplikacji)
+3. Dopuszczalne jest korzystanie z ogólnodostępnych rozwiązań.
+4. Konieczne jest udokumentowane API za pomocą Swagger lub innego narzędzia (dokumentacja powinna być generowana automatycznie)
+5. Możliwość dodania zdjęcia dania nie jest wymagana, lecz jej obecność zostanie pozytywnie odebrana.
+6. Dostarczony kod powinien posiadać pokrycie testami na poziomie min. 70% (coverage), dotyczy wyłącznie kodu napisanego przez kandydata (bez uwzględniania testów zewnętrznych bibliotek).
 
-Podział kontenerów Dockera:
+## 🧑‍🔬Technologia i metodyka <a name = "tech"></a>
+
+#### Podział kontenerów Dockera:
 - Python 3.8 z django
 - Baza Postgres dla django
 - Adminer
 - Upstream server nginx
-- Cron jako daemon do wysylki maili o wskazanej godzinie
+- Cron jako daemon do wysylki maili o wskazanej godzinie na wskazany endpoint
 
-Aplikacja:
+#### Aplikacja:
 
 - Aplikacja wykonana wg metodyki TDD. 
 - Krycie testami na poziomie ~90% 
